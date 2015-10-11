@@ -1,0 +1,7 @@
+server=chat.freenode.net
+port=6697
+nick=user
+#Nickserv info
+sasl=user:password
+real=Potteries hackspace bot
+channel=#potterieshackspace
