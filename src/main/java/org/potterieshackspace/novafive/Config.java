@@ -16,6 +16,7 @@ public class Config {
     public String real;
     public String channel;
     public String sasl;
+    public String webhookSecret;
 
     public Config() {
         Field[] methods = this.getClass().getFields();

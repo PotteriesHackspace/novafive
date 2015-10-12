@@ -5,3 +5,4 @@ nick=user
 sasl=user:password
 real=Potteries hackspace bot
 channel=#potterieshackspace
+webhooksecret=changeme

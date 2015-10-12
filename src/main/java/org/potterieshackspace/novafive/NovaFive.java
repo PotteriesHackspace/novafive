@@ -26,6 +26,8 @@ public class NovaFive {
 
         //Create our bot with the configuration
         PircBotX bot = new PircBotX(configuration);
+        Web web = new Web(bot, conf);
+        web.start();
         //Connect to the server
         bot.startBot();
     }
