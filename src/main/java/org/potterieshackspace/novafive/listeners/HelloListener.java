@@ -44,6 +44,12 @@ public class HelloListener extends ListenerAdapter {
 
                 event.respond("Responder added: " + split[1] + " - " + split[2]);
             }
+        } else {
+            responders.keySet().stream().forEach(x -> {
+                if (event.getMessage().startsWith(x)) {
+                    event.respond(responders.get(x));
+                }
+            });
         }
     }
 }
