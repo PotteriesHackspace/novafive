@@ -4,11 +4,12 @@ import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
 import org.pircbotx.cap.SASLCapHandler;
 import org.potterieshackspace.novafive.listeners.HelloListener;
+import org.potterieshackspace.novafive.listeners.ResponderListener;
 
 import javax.net.ssl.SSLSocketFactory;
 
 public class NovaFive {
-
+    private static PircBotX bot;
 
     public static void main(String[] args) throws Exception {
         Config conf = new Config();
@@ -22,13 +23,18 @@ public class NovaFive {
                 .addAutoJoinChannel(conf.channel) //Join the channel
                 .addCapHandler(new SASLCapHandler(conf.sasl.split(":", 2)[0], conf.sasl.split(":", 2)[1]))
                 .addListener(new HelloListener()) //Add our listener that will be called on Events
+                .addListener(new ResponderListener())
                 .buildConfiguration();
 
         //Create our bot with the configuration
-        PircBotX bot = new PircBotX(configuration);
+        bot = new PircBotX(configuration);
         Web web = new Web(bot, conf);
         web.start();
         //Connect to the server
         bot.startBot();
+    }
+
+    public static PircBotX getBot() {
+        return bot;
     }
 }
