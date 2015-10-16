@@ -27,7 +27,7 @@ public class HelloListener extends ListenerAdapter {
             e.printStackTrace();
         }
     }
-    //idiot split on first space
+
     @Override
     public void onGenericMessage(GenericMessageEvent event) {
         String message = event.getMessage().split(" ", 2)[0];
