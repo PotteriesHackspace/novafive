@@ -59,7 +59,7 @@ public class Web extends Thread {
                 Lease lease = new Lease(split[0], split[1], split[2]);
                 newLeases.add(lease);
                 if (print && !leases.contains(lease)) {
-                    bot.sendIRC().message("phs_rainbow", "[DHCPD]: New lease found! Client name: " + lease.getClientName() + ", IP: " + lease.getIp() + ", MAC: " + lease.getMac());
+                    bot.sendIRC().message(conf.channel, "[DHCPD]: New lease found! Client name: " + lease.getClientName() + ", IP: " + lease.getIp() + ", MAC: " + lease.getMac());
                 }
             }
 
