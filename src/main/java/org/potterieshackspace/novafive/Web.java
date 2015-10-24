@@ -68,6 +68,11 @@ public class Web extends Thread {
                     leases.remove(x);
                 }
             });
+            ((ArrayList<Lease>) newLeases.clone()).forEach(x -> {
+                if (leases.contains(x)) {
+                    newLeases.remove(x);
+                }
+            });
             leases.addAll(newLeases);
             leases.forEach(System.out::println);
 
