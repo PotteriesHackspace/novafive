@@ -14,7 +14,7 @@ public class Web extends Thread {
     private final PircBotX bot;
     private final Config conf;
     private final ArrayList<Lease> leases = new ArrayList<>();
-
+    private String lastLogin = "";
     public Web(PircBotX bot, Config conf) {
         this.bot = bot;
         this.conf = conf;
@@ -36,6 +36,24 @@ public class Web extends Thread {
                 String s = object.getAsJsonObject("repository").getAsJsonPrimitive("full_name").getAsString();
                 String diff = object.getAsJsonPrimitive("compare").getAsString();
                 bot.sendIRC().message(conf.channel, "[GitHub]: Push to " + s + " - " + diff);
+            }
+            response.status(200);
+            response.body("OK");
+            return response;
+        });
+
+        post("/webhook-door", (request, response) -> {
+//            bot.sendIRC().message(conf.channel, );
+            for (String s : request.headers()) {
+                System.out.println(s + ": " + request.headers(s));
+            }
+
+            System.out.println(request.body());
+            String[] split = request.body().split("\n");
+            String s = split[0];
+            if (!s.isEmpty() && !s.equals(lastLogin)) {
+                lastLogin = s;
+                bot.sendIRC().message(conf.channel, "[Door]: New login from " + lastLogin);
             }
             response.status(200);
             response.body("OK");
